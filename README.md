@@ -50,6 +50,7 @@ bash install.sh --dry-run
 | Android SDK | [下载 Command-line Tools](https://developer.android.com/studio#command-line-tools) | `brew install android-commandlinetools` | 手动下载配置 `ANDROID_HOME` |
 | NVM | [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh \| bash` | 同 macOS |
 | NRM | `npm install -g nrm` | 同 Windows | 同 Windows |
+| Hermes Agent | `npm install -g hermes` | `brew install hermes` 或 `npm install -g hermes` | `npm install -g hermes` |
 
 ### 2. 配置 API Keys
 
