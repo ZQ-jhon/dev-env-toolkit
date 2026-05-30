@@ -38,7 +38,36 @@ if [[ $DRY_RUN -eq 1 ]]; then
 fi
 
 # ============================================================
-step "1/5  Detecting runtimes"
+step "1/6  Configuring domestic mirrors (China)"
+# ============================================================
+info "Setting npm registry to npmmirror..."
+if [[ $DRY_RUN -eq 0 ]]; then
+    npm config set registry https://registry.npmmirror.com/
+    ok "npm registry → https://registry.npmmirror.com/"
+else
+    dry "Would set npm registry to npmmirror"
+fi
+
+info "Setting pip index-url to Tsinghua mirror..."
+if [[ $DRY_RUN -eq 0 ]]; then
+    PIP_CMD="pip3"; command -v pip3 &>/dev/null || PIP_CMD="pip"
+    $PIP_CMD config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple/
+    ok "pip index-url → https://pypi.tuna.tsinghua.edu.cn/simple/"
+else
+    dry "Would set pip index-url to Tsinghua mirror"
+fi
+
+info "Setting NVM_NODEJS_MIRROR for Node.js downloads..."
+if [[ $DRY_RUN -eq 0 ]]; then
+    echo 'export NVM_NODEJS_MIRROR=https://npmmirror.com/mirrors/node' >> ~/.zshrc 2>/dev/null || \
+    echo 'export NVM_NODEJS_MIRROR=https://npmmirror.com/mirrors/node' >> ~/.bashrc 2>/dev/null
+    ok "NVM_NODEJS_MIRROR → https://npmmirror.com/mirrors/node"
+else
+    dry "Would set NVM_NODEJS_MIRROR to npmmirror"
+fi
+
+# ============================================================
+step "2/6  Detecting runtimes"
 # ============================================================
 check_cmd() {
     if command -v "$1" &>/dev/null; then
@@ -66,7 +95,7 @@ if [[ $ALL_OK -eq 0 && $DRY_RUN -eq 0 ]]; then
 fi
 
 # ============================================================
-step "2/5  Installing OpenClaw (if needed)"
+step "3/6  Installing OpenClaw (if needed)"
 # ============================================================
 if command -v openclaw &>/dev/null; then
     ok "OpenClaw already installed"
@@ -77,7 +106,7 @@ else
 fi
 
 # ============================================================
-step "3/5  Installing Python packages"
+step "4/6  Installing Python packages (Tsinghua mirror)"
 # ============================================================
 if [[ $SKIP_PYTHON -eq 0 ]]; then
     PIP_CMD="pip3"; command -v pip3 &>/dev/null || PIP_CMD="pip"
@@ -88,7 +117,7 @@ if [[ $SKIP_PYTHON -eq 0 ]]; then
         "cffi==2.0.0" "charset-normalizer==3.4.7" "colorama==0.4.6"
         "cryptography==48.0.0" "distro==1.9.0" "edge-tts==7.2.7"
         "fire==0.7.1" "frozenlist==1.8.0" "h11==0.16.0"
-        "httpcore==1.0.9" "httpx==28.1" "idna==3.16"
+        "httpcore==1.0.9" "httpx==0.28.1" "idna==3.16"
         "Jinja2==3.1.6" "jiter==0.15.0" "jmespath==1.1.0"
         "markdown-it-py==4.2.0" "MarkupSafe==3.0.3" "mdurl==0.1.2"
         "multidict==6.7.1" "openai==2.24.0" "packaging==26.2"
@@ -103,29 +132,29 @@ if [[ $SKIP_PYTHON -eq 0 ]]; then
         "typing_extensions==4.15.0" "typing-inspection==0.4.2"
         "tzdata==2025.3" "urllib3==2.7.0" "wcwidth==0.7.0" "wheel==0.47.0"
     )
-    info "Installing ${#PACKAGES[@]} Python packages..."
+    info "Installing ${#PACKAGES[@]} Python packages via Tsinghua mirror..."
     if [[ $DRY_RUN -eq 0 ]]; then
-        $PIP_CMD install "${PACKAGES[@]}" 2>&1 | tail -5
-        ok "Python packages installed"
+        $PIP_CMD install "${PACKAGES[@]}" -i https://pypi.tuna.tsinghua.edu.cn/simple/ 2>&1 | tail -5
+        ok "Python packages installed (mirror: Tsinghua)"
     else
-        dry "Would run: $PIP_CMD install ${#PACKAGES[@]} packages"
+        dry "Would run: $PIP_CMD install ${#PACKAGES[@]} packages (Tsinghua mirror)"
     fi
 else
     warn "Skipping Python packages (--skip-python flag set)"
 fi
 
 # ============================================================
-step "4/5  Installing npm global packages"
+step "5/6  Installing npm global packages (npmmirror)"
 # ============================================================
 if [[ $SKIP_NODE -eq 0 ]]; then
     NPM_PACKAGES=("@larksuite/cli@1.0.44" "@openai/codex@0.133.0")
     for pkg in "${NPM_PACKAGES[@]}"; do
-        info "npm install -g $pkg"
+        info "npm install -g $pkg (registry: npmmirror)"
         if [[ $DRY_RUN -eq 0 ]]; then
-            npm install -g "$pkg" 2>&1 | tail -1
+            npm install -g "$pkg" --registry https://registry.npmmirror.com/ 2>&1 | tail -1
             ok "Installed: $pkg"
         else
-            dry "Would run: npm install -g $pkg"
+            dry "Would run: npm install -g $pkg (npmmirror)"
         fi
     done
 else
@@ -133,7 +162,7 @@ else
 fi
 
 # ============================================================
-step "5/5  Installing Skills"
+step "6/6  Installing Skills (npmmirror)"
 # ============================================================
 if [[ $SKIP_SKILLS -eq 0 ]]; then
     SKILLS=(
@@ -144,7 +173,7 @@ if [[ $SKIP_SKILLS -eq 0 ]]; then
         "meituan-travel" "tencent-esign-contract" "tencent-meeting-mcp"
         "weread-skills" "tencent-survey"
     )
-    info "Installing ${#SKILLS[@]} skills via skillhub..."
+    info "Installing ${#SKILLS[@]} skills via skillhub (npmmirror)..."
     for skill in "${SKILLS[@]}"; do
         if [[ $DRY_RUN -eq 0 ]]; then
             openclaw skillhub install "$skill" 2>&1 | tail -1
@@ -159,6 +188,9 @@ fi
 
 # ============================================================
 echo -e "\n${GREEN}====== All Done! ======${NC}"
+echo -e "${YELLOW}Mirrors configured:${NC}"
+echo "  npm : https://registry.npmmirror.com/"
+echo "  pip  : https://pypi.tuna.tsinghua.edu.cn/simple/"
 echo -e "${YELLOW}Remaining manual steps:${NC}"
 echo "  1. Create .env file with your API keys (see TO-DO-LIST.md Phase 3)"
 echo "  2. Run: openclaw gateway restart"

@@ -8,8 +8,7 @@ param(
     [switch]$DryRun,
     [switch]$SkipPython,
     [switch]$SkipNode,
-    [switch]$SkipSkills,
-    [switch]$ToolsOnly
+    [switch]$SkipSkills
 )
 
 $ErrorActionPreference = "Stop"
@@ -25,7 +24,7 @@ function Write-Dry($msg)   { Write-Host "    [DRY] $msg" -ForegroundColor Magent
 if ($DryRun) { Write-Host "`n[DRY RUN MODE — no changes will be made]" -ForegroundColor Magenta }
 
 # ============================================================
-Write-Step "1/5  Detecting runtimes"
+Write-Step "1/6  Detecting runtimes"
 # ============================================================
 $checks = @(
     @{ Name="Git";    Cmd="git --version";       Min="";   Var=$null },
@@ -52,18 +51,43 @@ if (-not $allOk) {
 }
 
 # ============================================================
-Write-Step "2/5  Installing OpenClaw (if needed)"
+Write-Step "2/6  Configuring domestic mirrors (China)"
+# ============================================================
+Write-Info "Setting npm registry to npmmirror (China mirror)..."
+if (-not $DryRun) {
+    npm config set registry https://registry.npmmirror.com/
+    Write-Ok "npm registry → https://registry.npmmirror.com/"
+} else {
+    Write-Dry "Would set npm registry to https://registry.npmmirror.com/"
+}
+
+Write-Info "Setting pip index-url to Tsinghua mirror..."
+if (-not $DryRun) {
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple/
+    Write-Ok "pip index-url → https://pypi.tuna.tsinghua.edu.cn/simple/"
+} else {
+    Write-Dry "Would set pip index-url to Tsinghua mirror"
+}
+
+# ============================================================
+Write-Step "3/6  Installing OpenClaw (if needed)"
 # ============================================================
 $oc = Get-Command openclaw -ErrorAction SilentlyContinue
 if ($oc) {
     Write-Ok "OpenClaw already installed: $($oc.Source)"
 } else {
-    Write-Info "OpenClaw not found. Please install manually from https://openclaw.ai"
-    if (-not $DryRun) { exit 1 }
+    Write-Info "OpenClaw not found. Installing..."
+    if (-not $DryRun) {
+        Write-Warn "Please install OpenClaw manually from https://openclaw.ai"
+        Write-Host "  Then re-run this script." -ForegroundColor Yellow
+        exit 1
+    } else {
+        Write-Dry "Would install OpenClaw"
+    }
 }
 
 # ============================================================
-Write-Step "3/5  Installing Python packages"
+Write-Step "4/6  Installing Python packages (Tsinghua mirror)"
 # ============================================================
 if (-not $SkipPython) {
     $pkgs = @(
@@ -88,30 +112,30 @@ if (-not $SkipPython) {
         "typing_extensions==4.15.0", "typing-inspection==0.4.2",
         "tzdata==2025.3", "urllib3==2.7.0", "wcwidth==0.7.0", "wheel==0.47.0"
     )
-    Write-Info "Installing $($pkgs.Count) Python packages..."
+    Write-Info "Installing $($pkgs.Count) Python packages via Tsinghua mirror..."
     if (-not $DryRun) {
-        pip install $pkgs 2>&1 | Out-Null
-        Write-Ok "Python packages installed"
+        pip install $pkgs -i https://pypi.tuna.tsinghua.edu.cn/simple/ 2>&1 | Out-Null
+        Write-Ok "Python packages installed (mirror: Tsinghua)"
     } else {
-        Write-Dry "Would run: pip install $($pkgs.Count) packages"
+        Write-Dry "Would run: pip install $($pkgs.Count) packages (Tsinghua mirror)"
     }
 } else {
     Write-Warn "Skipping Python packages (SkipPython flag set)"
 }
 
 # ============================================================
-Write-Step "4/5  Installing npm global packages"
+Write-Step "5/6  Installing npm global packages (npmmirror)"
 # ============================================================
 if (-not $SkipNode) {
-    $npmPkgs = @(" @larksuite/cli@1.0.44", "@openai/codex@0.133.0" )
+    $npmPkgs = @("@larksuite/cli@1.0.44", "@openai/codex@0.133.0")
     foreach ($pkg in $npmPkgs) {
-        Write-Info "npm install -g $pkg"
+        Write-Info "npm install -g $pkg (registry: npmmirror)"
         if (-not $DryRun) {
-            npm install -g $pkg 2>&1 | Out-Null
+            npm install -g $pkg --registry https://registry.npmmirror.com/ 2>&1 | Out-Null
             if ($LASTEXITCODE -eq 0) { Write-Ok "Installed: $pkg" }
             else { Write-Warn "Failed: $pkg (may already be installed)" }
         } else {
-            Write-Dry "Would run: npm install -g $pkg"
+            Write-Dry "Would run: npm install -g $pkg (npmmirror)"
         }
     }
 } else {
@@ -119,18 +143,18 @@ if (-not $SkipNode) {
 }
 
 # ============================================================
-Write-Step "5/5  Installing Skills"
+Write-Step "6/6  Installing Skills (npmmirror)"
 # ============================================================
 if (-not $SkipSkills) {
     $skills = @(
         "aippt", "another_them", "cloud-upload-backup", "docx",
-        "email-skill", "fbsbook", "imap-smtp-email", "kdocs",
+        "email-skill", "fbs_bookwriter", "imap-smtp-email", "kdocs",
         "mcporter", "multi-search-engine", "pdf", "persona-switch",
         "wecom-weisheng-scrm", "xlsx", "bdpan-storage",
         "meituan-travel", "tencent-esign-contract", "tencent-meeting-mcp",
         "weread-skills", "tencent-survey"
     )
-    Write-Info "Installing $($skills.Count) skills via skillhub..."
+    Write-Info "Installing $($skills.Count) skills via skillhub (npmmirror)..."
     foreach ($skill in $skills) {
         if (-not $DryRun) {
             openclaw skillhub install $skill 2>&1 | Out-Null
@@ -145,6 +169,9 @@ if (-not $SkipSkills) {
 
 # ============================================================
 Write-Host "`n====== All Done! ======" -ForegroundColor Green
-Write-Host "Remaining manual steps:" -ForegroundColor Yellow
+Write-Host "Mirrors configured:" -ForegroundColor Cyan
+Write-Host "  npm : https://registry.npmmirror.com/"
+Write-Host "  pip  : https://pypi.tuna.tsinghua.edu.cn/simple/"
+Write-Host "`nRemaining manual steps:" -ForegroundColor Yellow
 Write-Host "  1. Create .env file with your API keys (see TO-DO-LIST.md Phase 3)"
 Write-Host "  2. Run: openclaw gateway restart"
