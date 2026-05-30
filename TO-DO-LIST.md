@@ -347,7 +347,8 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 | **Obsidian**（笔记） | `winget install Obsidian.Obsidian` | `brew install --cask obsidian` | [AppImage](https://obsidian.md/download) |
 | **Postman**（API 测试） | `winget install Postman.Postman` | `brew install --cask postman` | [官网下载](https://www.postman.com/downloads/) |
 | **Microsoft Edge**（浏览器） | 已内置 / `winget install Microsoft.Edge` | `brew install --cask microsoft-edge` | [官网下载](https://www.microsoft.com/edge) |
-| **Clash Verge**（代理工具） | [下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) / `winget install Clash.Verge.Rev` | `brew install --cask clash-verge-rev` | [官网下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) |
+| **VS Code**（编辑器） | `winget install Microsoft.VisualStudioCode` | `brew install --cask visual-studio-code` | `sudo snap install code --classic` |
+| **微信输入法**（电脑版） | [官网下载](https://zhiwen.weixin.qq.com/) 或 `winget install Tencent.WeType` | 不支持 | 不支持 |
 
 ### 9.2 macOS 专属
 
@@ -362,6 +363,7 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 | **CC Switch**（剪贴板管理） | [官网](https://ccswitch.cc/) 或 `winget install CCSwitch` |
 | **Typeless**（打字统计） | [Microsoft Store](https://apps.microsoft.com/store/detail/typeless/) |
 | **Charles**（HTTP 抓包代理） | `winget install Charles.Charles` 或 [官网](https://www.charlesproxy.com/) |
+| **微信输入法**（电脑版） | [官网](https://zhiwen.weixin.qq.com/) 或 `winget install Tencent.WeType` |
 
 ### 9.4 一键安装（可选）
 
@@ -372,7 +374,7 @@ winget install Snipaste.Snipaste WarpTerminal.Warp Obsidian.Obsidian Postman.Pos
 
 ```bash
 # macOS：用 brew 批量安装
-brew install --cask snipaste warp obsidian postman microsoft-edge clash-verge-rev raycast charles
+brew install --cask snipaste warp obsidian postman microsoft-edge clash-verge-rev raycast charles visual-studio-code
 ```
 
 ---
