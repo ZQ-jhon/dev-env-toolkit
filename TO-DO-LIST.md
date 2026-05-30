@@ -334,7 +334,50 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 
 ---
 
-## Phase 8：最终验证
+## Phase 9：常用软件工具包
+
+> ⚠️ **前提**：请先完成 Phase 1~8 基础环境安装，再执行本 Phase
+
+### 9.1 跨平台软件
+
+| 软件 | Windows | macOS | Linux |
+|------|--------|-------|-------|
+| **Snipaste**（截图/贴图） | `winget install Snipaste.Snipaste` | [官网下载](https://www.snipaste.com/download.html) | [AppImage](https://www.snipaste.com/download.html) |
+| **Warp**（AI 终端） | `winget install WarpTerminal.Warp` | `brew install --cask warp` | 不支持 |
+| **Obsidian**（笔记） | `winget install Obsidian.Obsidian` | `brew install --cask obsidian` | [AppImage](https://obsidian.md/download) |
+| **Postman**（API 测试） | `winget install Postman.Postman` | `brew install --cask postman` | [官网下载](https://www.postman.com/downloads/) |
+| **Microsoft Edge**（浏览器） | 已内置 / `winget install Microsoft.Edge` | `brew install --cask microsoft-edge` | [官网下载](https://www.microsoft.com/edge) |
+| **Clash Verge**（代理工具） | [下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) / `winget install Clash.Verge.Rev` | `brew install --cask clash-verge-rev` | [官网下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) |
+
+### 9.2 macOS 专属
+
+| 软件 | 安装方式 |
+|------|----------|
+| **Raycast**（启动器/效率工具） | `brew install --cask raycast` |
+
+### 9.3 Windows 专属
+
+| 软件 | 安装方式 |
+|------|----------|
+| **CC Switch**（剪贴板管理） | [官网](https://ccswitch.cc/) 或 `winget install CCSwitch` |
+| **Typeless**（打字统计） | [Microsoft Store](https://apps.microsoft.com/store/detail/typeless/) |
+| **Charles**（HTTP 抓包代理） | `winget install Charles.Charles` 或 [官网](https://www.charlesproxy.com/) |
+
+### 9.4 一键安装（可选）
+
+```powershell
+# Windows：用 winget 批量安装
+winget install Snipaste.Snipaste WarpTerminal.Warp Obsidian.Obsidian Postman.Postman Microsoft.Edge Clash.Verge.Rev Charles.Charles
+```
+
+```bash
+# macOS：用 brew 批量安装
+brew install --cask snipaste warp obsidian postman microsoft-edge clash-verge-rev raycast charles
+```
+
+---
+
+## Phase 10：最终验证
 
 - [ ] `openclaw gateway status` — Gateway 正常运行
 - [ ] `openclaw skills list` — 所有 skills 已安装
@@ -344,6 +387,7 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 - [ ] `nrm --version` — NRM 正常
 - [ ] `hermes --version` — Hermes CLI 正常
 - [ ] `hermes-agent --version` — Hermes Agent 正常
+- [ ] 常用软件均已安装（Snipaste / Warp / Obsidian / Postman / Edge / Clash Verge ...）
 - [ ] `python --version` → 3.12.10
 - [ ] `node --version` → v22.16.0
 - [ ] `npm --version` → 10.9.8
