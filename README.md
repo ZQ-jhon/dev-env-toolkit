@@ -2,20 +2,7 @@
 
 一键恢复完整开发环境的工具包，支持 **Windows / macOS / Linux**。
 
----
-
-## 包含内容
-
-| 类别 | 内容 |
-|------|------|
-| **运行环境** | Git, Node.js & npm, Python & pip, JDK 17, Android SDK (adb), NVM, NRM |
-| **Python 包** | 62 个（见 `requirements.txt`，含 openai, boto3, pydantic 等） |
-| **npm 全局包** | `@larksuite/cli`, `@openai/codex` |
-| **OpenClaw** | v0.2.23.532 配置模板 + skills 清单 |
-| **一键脚本** | `install.ps1`（Windows）+ `install.sh`（macOS/Linux） |
-| **常用软件** | Snipaste, Warp, Obsidian, Postman, Edge, Clash Verge, VS Code, Raycast(macOS), CC Switch(Windows), Charles, Typeless(Windows), WeType(Windows) |
-
-> Skills 可从公开平台按需实时下载，本仓库不存储 `.skill` 文件。
+新电脑上 Agent 只需看 **TO-DO-LIST.md**（完整安装清单）或直接运行一键脚本。
 
 ---
 
@@ -38,114 +25,90 @@ bash install.sh --dry-run
 
 ---
 
-## 安装步骤
-
-### 1. 基础环境
-
-| 工具 | Windows | macOS | Linux |
-|------|--------|-------|-------|
-| Git | `winget install Git.Git` | `brew install git` | `sudo apt install git` |
-| Node.js & npm | `winget install OpenJS.NodeJS` | `brew install node` | `sudo apt install nodejs npm` |
-| Python & pip | `winget install Python.Python.3` | `brew install python@3.12` | `sudo apt install python3 python3-pip` |
-| JDK 17 | `winget install EclipseAdoptium.Temurin.17JDK` | `brew install openjdk@17` | `sudo apt install openjdk-17-jdk` |
-| Android SDK | [下载 Command-line Tools](https://developer.android.com/studio#command-line-tools) | `brew install android-commandlinetools` | 手动下载配置 `ANDROID_HOME` |
-| NVM | [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh \| bash` | 同 macOS |
-| NRM | `npm install -g nrm` | 同 Windows | 同 Windows |
-| Hermes Agent | `npm install -g hermes` | `brew install hermes` 或 `npm install -g hermes` | `npm install -g hermes` |
-| Claude Code | `npm install -g @anthropic-ai/claude-code` | `brew install anthropic/claude/claude` | `npm install -g @anthropic-ai/claude-code` |
-
-### 2. 配置 API Keys
-
-```bash
-cp .env.template .env
-# 编辑 .env，填入真实 Key
-```
-
-### 3. 运行安装脚本
-
-```powershell
-# Windows
-.\install.ps1
-```
-
-```bash
-# macOS / Linux
-bash install.sh
-```
-
-脚本会自动检测平台，安装缺失的工具，恢复 Python/npm 包。
-
-### 4. 安装常用软件
-
-| 软件 | Windows | macOS | Linux |
-|------|--------|-------|------|
-| Snipaste | `winget install Snipaste.Snipaste` | [官网](https://www.snipaste.com/) | [AppImage](https://www.snipaste.com/) |
-| Warp | `winget install WarpTerminal.Warp` | `brew install --cask warp` | 不支持 |
-| Obsidian | `winget install Obsidian.Obsidian` | `brew install --cask obsidian` | [AppImage](https://obsidian.md/) |
-| Postman | `winget install Postman.Postman` | `brew install --cask postman` | [官网](https://www.postman.com/) |
-| Edge | `winget install Microsoft.Edge` | `brew install --cask microsoft-edge` | [官网](https://www.microsoft.com/edge) |
-| Clash Verge | `winget install Clash.Verge.Rev` | `brew install --cask clash-verge-rev` | [下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) |
-| **VS Code** | `winget install Microsoft.VisualStudioCode` | `brew install --cask visual-studio-code` | `sudo snap install code --classic` |
-| Raycast | 不支持 | `brew install --cask raycast` | 不支持 |
-| CC Switch | `winget install CCSwitch` | 不支持 | 不支持 |
-| Charles | `winget install Charles.Charles` | `brew install --cask charles` | 不支持 |
-| Typeless | [Store](https://apps.microsoft.com/store/detail/typeless/) | 不支持 | 不支持 |
-| **微信输入法（WeType）** | [官网](https://zhiwen.weixin.qq.com/) 或 `winget install Tencent.WeType` | 不支持 | 不支持 |
-
-> ⚠️ 软件安装前请先完成基础环境（Phase 1~8）
-
-### 5. 验证
-
-```bash
-node --version && npm --version
-python --version && pip --version
-java -version
-adb --version
-openclaw gateway status
-```
-
----
-
-## 文件说明
+## 仓库结构
 
 | 文件 | 用途 |
 |------|------|
+| `TO-DO-LIST.md` | **完整安装清单**（唯一需要人工看的文件） |
 | `install.ps1` | Windows 一键安装脚本 |
 | `install.sh` | macOS/Linux 一键安装脚本 |
-| `requirements.txt` | Python pip 包列表（`pip freeze`） |
-| `npm-global.txt` | npm 全局包列表 |
-| `.env.template` | API Key 模板（复制为 `.env` 后填写） |
-| `openclaw-config-template.json` | OpenClaw 配置模板（API Key 已脱敏） |
-| `TO-DO-LIST.md` | 完整安装 Checklist（跨平台） |
-| `setup-guide.md` | 详细安装指南 |
-| `skills-manifest.json` | Skills 版本清单（供参考，无需手动安装） |
+| `README.md` | 本文件（入口说明） |
+| `.gitignore` | Git 忽略规则 |
+
+> **不需要**手动安装 Python 包 / npm 包 / skills —— 脚本全自动处理。
 
 ---
 
-## 常用软件一览
+## 包含内容速览
 
-| 软件 | 用途 | 平台 |
-|------|------|------|
-| Snipaste | 截图/贴图 | Windows / macOS / Linux |
-| Warp | AI 终端增强 | Windows / macOS |
-| Obsidian | Markdown 笔记 | Windows / macOS / Linux |
-| Postman | API 接口测试 | Windows / macOS / Linux |
-| Microsoft Edge | 浏览器 | Windows / macOS / Linux |
-| Clash Verge | 代理 / 科学上网 | Windows / macOS / Linux |
-| Raycast | 启动器/效率工具 | macOS only |
-| CC Switch | 剪贴板管理 | Windows only |
-| Charles | HTTP 抓包代理 | Windows / macOS |
-| **VS Code** | 代码编辑器 | Windows / macOS / Linux |
-| **微信输入法** | 中文输入法 | Windows only |
-| Typeless | 打字统计 | Windows only |
+| 类别 | 内容 |
+|------|------|
+| **运行环境** | Git, Node.js & npm, Python & pip, NVM, NRM, Hermes Agent, Claude Code |
+| **Python 包** | 62 个（openai, boto3, pydantic, requests 等，脚本自动安装） |
+| **npm 全局包** | `@larksuite/cli`, `@openai/codex`（脚本自动安装） |
+| **OpenClaw** | 配置参考（见 TO-DO-LIST.md Phase 2~3） |
+| **Skills** | 19 个（脚本通过 skillhub 自动安装） |
+| **常用软件** | Snipaste, Warp, Obsidian, Postman, Edge, VS Code, Sublime Merge, Typeless, CC Switch, Clash Verge, WeType, Raycast(macOS), Charles(Windows) |
+
+---
+
+## 安装步骤概览
+
+详细步骤见 **TO-DO-LIST.md**，脚本一键完成以下所有：
+
+1. **Phase 1** — 基础运行环境（Git / Node.js / Python / NVM / NRM / Hermes / Claude Code）
+2. **Phase 2** — OpenClaw 安装与配置
+3. **Phase 3** — API Keys 配置（复制模板，手动填 Key）
+4. **Phase 4** — Skills 安装（19 个，通过 skillhub）
+5. **Phase 5** — Python 包安装（62 个）
+6. **Phase 6** — npm 全局包安装
+7. **Phase 7** — Agent 配置
+8. **Phase 8** — 常用软件安装（见 TO-DO-LIST.md 各平台表格）
+9. **Phase 9** — 最终验证
+
+---
+
+## API Keys（脱敏）
+
+所有 Key 均已脱敏，真实值请参照 `TO-DO-LIST.md` Phase 3 创建 `.env` 文件手动填入。
+
+需要的 Key 清单：
+- `LLM_BASE_URL` / `LLM_API_KEY` — 内部 LLM 代理
+- `OPENROUTER_API_KEY` — https://openrouter.ai/keys
+- `DEEPSEEK_API_KEY` — https://platform.deepseek.com
+- `WECHAT_WS_URL` — 微信 WebSocket 地址（内部）
+- `FEISHU_APP_ID_n` / `FEISHU_APP_SECRET_n` — 飞书应用（最多 5 个）
+
+---
+
+## 常用软件平台支持
+
+| 软件 | Windows | macOS | Linux |
+|------|---------|-------|-------|
+| Snipaste | ✅ | ✅ | ✅ (AppImage) |
+| Warp | ✅ | ✅ | ❌ |
+| Obsidian | ✅ | ✅ | ✅ (AppImage) |
+| Postman | ✅ | ✅ | ✅ |
+| Microsoft Edge | ✅ | ✅ | ✅ |
+| VS Code | ✅ | ✅ | ✅ |
+| Sublime Merge | ✅ | ✅ | ✅ |
+| Typeless | ✅ | ✅ | ✅ |
+| CC Switch | ✅ | ✅ | ✅ |
+| Clash Verge | ✅ | ✅ | ✅ |
+| 微信输入法 (WeType) | ✅ | ❌ | ❌ |
+| Raycast | ❌ | ✅ | ❌ |
+| Charles | ✅ | ✅ | ❌ |
+
+> 各软件具体安装命令见 TO-DO-LIST.md Phase 8
 
 ---
 
 ## 注意事项
 
-- **API Keys 未包含在本仓库中**，请从 `.env.template` 复制后自行填写
 - 仓库设为 **Private**，仅作者可见
-- Skills 建议通过各平台按需搜索安装，无需全部预装
+- API Keys **不要**提交到 Git（已加入 `.gitignore`）
+- Skills 通过 `openclaw skillhub install` 按需安装，不占用仓库空间
+- 新电脑直接 `git clone` + 运行脚本即可，无需参考其他文件
 
 ---
 

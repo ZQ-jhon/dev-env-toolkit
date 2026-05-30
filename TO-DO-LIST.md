@@ -46,52 +46,15 @@ npm --version    # 当前 10.9.8
 ```bash
 # 验证
 python --version   # 或 python3 --version，当前 3.12.10
-pip --version    # 或 pip3 --version，当前 26.1.1
+pip --version      # 或 pip3 --version，当前 26.1.1
 ```
 
-### 1.4 JDK（OpenJDK / Temurin）
-
-| 平台 | 安装方式 |
-|------|-----------|
-| Windows | `winget install EclipseAdoptium.Temurin.17JDK` |
-| macOS | `brew install openjdk@17` |
-| Linux | `sudo apt install openjdk-17-jdk` |
-
-```bash
-# 验证
-java -version
-# 当前版本：OpenJDK 17.0.19 (Temurin)
-```
-
-- **JAVA_HOME 配置**：
-  - Windows（PowerShell）：`[Environment]::SetEnvironmentVariable('JAVA_HOME', 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot', 'User')`
-  - macOS/Linux（bash/zsh）：`export JAVA_HOME=$(/usr/libexec/java_home -v 17)` → 写入 `~/.zshrc` 或 `~/.bashrc`
-
-### 1.5 Android SDK（含 adb）
-
-| 平台 | 安装方式 |
-|------|-----------|
-| Windows | 安装 Android Studio，或单独下载 [Command-line Tools](https://developer.android.com/studio#command-line-tools) |
-| macOS | `brew install android-commandlinetools` |
-| Linux | 下载 command-line tools 并配置 `ANDROID_HOME` |
-
-```bash
-# 验证
-adb --version
-# 当前版本：Android Debug Bridge v1.0.41 (Platform-Tools 37.0.0)
-```
-
-- **ANDROID_HOME 配置**：
-  - Windows：默认 `C:\Users\<user>\AppData\Local\Android\Sdk`
-  - macOS/Linux：`~/Library/Android/sdk` 或 `~/Android/Sdk`
-  - 将 `$ANDROID_HOME/platform-tools` 加入 PATH
-
-### 1.6 NVM（Node Version Manager）
+### 1.4 NVM（Node Version Manager）
 
 | 平台 | 安装方式 |
 |------|-----------|
 | Windows | 下载 [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) 安装包 |
-| macOS/Linux | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash` |
+| macOS/Linux | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh \| bash` |
 
 ```bash
 # 验证
@@ -103,7 +66,7 @@ nvm install lts
 nvm use 22.16.0
 ```
 
-### 1.7 NRM（npm Registry Manager）
+### 1.5 NRM（npm Registry Manager）
 
 ```bash
 # 安装（跨平台）
@@ -119,7 +82,7 @@ nrm use taobao    # 淘宝镜像 https://registry.npmmirror.com/
 nrm use tencent   # 腾讯镜像 https://mirrors.tencent.com/npm/
 ```
 
-### 1.8 Hermes Agent
+### 1.6 Hermes Agent
 
 | 平台 | 安装方式 |
 |------|----------|
@@ -141,12 +104,12 @@ hermes-agent --version
 > pip install websockets
 > ```
 
-### 1.9 Claude Code（Anthropic CLI 编程助手）
+### 1.7 Claude Code（Anthropic CLI 编程助手）
 
 | 平台 | 安装方式 |
 |------|----------|
 | Windows | `npm install -g @anthropic-ai/claude-code` |
-| macOS | `brew install anthropic/claude/claude` 或 `npm install -g @anthropic-ai/claude-code` |
+| macOS | `brew install --cask claude` 或 `npm install -g @anthropic-ai/claude-code` |
 | Linux | `npm install -g @anthropic-ai/claude-code` |
 
 ```bash
@@ -334,11 +297,11 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 
 ---
 
-## Phase 9：常用软件工具包
+## Phase 8：常用软件工具包
 
-> ⚠️ **前提**：请先完成 Phase 1~8 基础环境安装，再执行本 Phase
+> ⚠️ **前提**：请先完成 Phase 1~7 基础环境安装，再执行本 Phase
 
-### 9.1 跨平台软件
+### 8.1 跨平台软件
 
 | 软件 | Windows | macOS | Linux |
 |------|--------|-------|-------|
@@ -348,43 +311,42 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 | **Postman**（API 测试） | `winget install Postman.Postman` | `brew install --cask postman` | [官网下载](https://www.postman.com/downloads/) |
 | **Microsoft Edge**（浏览器） | 已内置 / `winget install Microsoft.Edge` | `brew install --cask microsoft-edge` | [官网下载](https://www.microsoft.com/edge) |
 | **VS Code**（编辑器） | `winget install Microsoft.VisualStudioCode` | `brew install --cask visual-studio-code` | `sudo snap install code --classic` |
+| **Sublime Merge**（Git 客户端） | `winget install SublimeHQ.SublimeMerge` | `brew install --cask sublime-merge` | [官网下载](https://www.sublimemerge.com/download) |
+| **Typeless**（AI 语音输入法） | [官网下载](https://typelesscn.cn/) | [官网下载](https://typelesscn.cn/) | [官网下载](https://typelesscn.cn/) |
+| **CC Switch**（AI 编程 CLI 管理） | [官网](https://www.ccswitch.io/zh/) | [官网](https://www.ccswitch.io/zh/) | [官网](https://www.ccswitch.io/zh/) |
+| **Clash Verge**（代理工具） | [下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) / `winget install Clash.Verge.Rev` | `brew install --cask clash-verge-rev` | [官网下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) |
 | **微信输入法**（电脑版） | [官网下载](https://zhiwen.weixin.qq.com/) 或 `winget install Tencent.WeType` | 不支持 | 不支持 |
 
-### 9.2 macOS 专属
+### 8.2 macOS 专属
 
 | 软件 | 安装方式 |
 |------|----------|
 | **Raycast**（启动器/效率工具） | `brew install --cask raycast` |
 
-### 9.3 Windows 专属
+### 8.3 Windows 专属
 
 | 软件 | 安装方式 |
 |------|----------|
-| **CC Switch**（剪贴板管理） | [官网](https://ccswitch.cc/) 或 `winget install CCSwitch` |
-| **Typeless**（打字统计） | [Microsoft Store](https://apps.microsoft.com/store/detail/typeless/) |
 | **Charles**（HTTP 抓包代理） | `winget install Charles.Charles` 或 [官网](https://www.charlesproxy.com/) |
-| **微信输入法**（电脑版） | [官网](https://zhiwen.weixin.qq.com/) 或 `winget install Tencent.WeType` |
 
-### 9.4 一键安装（可选）
+### 8.4 一键批量安装（可选）
 
 ```powershell
 # Windows：用 winget 批量安装
-winget install Snipaste.Snipaste WarpTerminal.Warp Obsidian.Obsidian Postman.Postman Microsoft.Edge Clash.Verge.Rev Charles.Charles
+winget install Snipaste.Snipaste WarpTerminal.Warp Obsidian.Obsidian Postman.Postman Microsoft.Edge Clash.Verge.Rev Charles.Charles SublimeHQ.SublimeMerge Tencent.WeType
 ```
 
 ```bash
 # macOS：用 brew 批量安装
-brew install --cask snipaste warp obsidian postman microsoft-edge clash-verge-rev raycast charles visual-studio-code
+brew install --cask snipaste warp obsidian postman microsoft-edge clash-verge-rev raycast charles visual-studio-code sublime-merge typeless cc-switch
 ```
 
 ---
 
-## Phase 10：最终验证
+## Phase 9：最终验证
 
 - [ ] `openclaw gateway status` — Gateway 正常运行
 - [ ] `openclaw skills list` — 所有 skills 已安装
-- [ ] `java -version` — JDK 17 正常
-- [ ] `adb --version` — Android SDK 正常
 - [ ] `nvm version` — NVM 正常
 - [ ] `nrm --version` — NRM 正常
 - [ ] `hermes --version` — Hermes CLI 正常
@@ -398,7 +360,7 @@ brew install --cask snipaste warp obsidian postman microsoft-edge clash-verge-re
 
 ---
 
-## 附：一键安装（推荐）
+## 附：一键安装脚本（推荐）
 
 如果不想手动逐步操作，直接用一键安装脚本（自动检测平台）：
 
