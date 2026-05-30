@@ -1,0 +1,100 @@
+{
+  "label": "dev-env-toolkit",
+  "generated_at": "2026-05-31T01:30:00+08:00",
+  "openclaw_version": "v0.2.23.532",
+  "runtimes": {
+    "node": "v22.16.0",
+    "npm": "10.9.8",
+    "python": "3.12.10",
+    "pip": "26.1.1",
+    "git": "2.54.0.windows.1"
+  },
+  "skills": {
+    "system_skills": {
+      "description": "Installed via QClaw skill store (system-managed)",
+      "note": "Install these via QClaw UI or skillhub_install tool",
+      "items": [
+        {"name": "aippt", "version": 3, "scope": "global", "installed_at": "2026-05-27"},
+        {"name": "another_them", "version": 1, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "cloud-upload-backup", "version": 2, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "docx", "version": 1, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "email-skill", "version": 2, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "fbs_bookwriter", "version": 1, "scope": "global", "installed_at": "2026-05-20"},
+        {"name": "imap-smtp-email", "version": 5, "scope": "global", "installed_at": "2026-05-30"},
+        {"name": "kdocs", "version": 1, "scope": "global", "installed_at": "2026-05-20"},
+        {"name": "mcporter", "version": 1, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "multi-search-engine", "version": 2, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "pdf", "version": 1, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "persona-switch", "version": 7, "scope": "agent", "installed_at": "2026-05-23"},
+        {"name": "wecom-weisheng-scrm", "version": 1, "scope": "global", "installed_at": "2026-05-20"},
+        {"name": "xlsx", "version": 1, "scope": "agent", "installed_at": "2026-05-20"},
+        {"name": "bdpan-storage", "version": 1, "scope": "global", "installed_at": "2026-05-20"},
+        {"name": "meituan-travel", "version": 1, "scope": "global", "installed_at": "2026-05-21"},
+        {"name": "tencent-esign-contract", "version": 1, "scope": "global", "installed_at": "2026-05-21"},
+        {"name": "tencent-meeting-mcp", "version": 1, "scope": "global", "installed_at": "2026-05-27"},
+        {"name": "weread-skills", "version": 1, "scope": "global", "installed_at": "2026-05-29"},
+        {"name": "tencent-survey", "version": 1, "scope": "global", "installed_at": "2026-05-30"}
+      ]
+    },
+    "local_skills": {
+      "description": "Manually created / local skills (not from store)",
+      "note": "These need to be recreated or copied from backup",
+      "items": [
+        {"name": "agent-development", "location": "~/.openclaw/skills/ and ~/.agents/skills/"},
+        {"name": "agent-evaluation", "location": "~/.openclaw/skills/ and ~/.agents/skills/"},
+        {"name": "agent-manager-skill", "location": "~/.openclaw/skills/ and ~/.agents/skills/"},
+        {"name": "excel-analysis", "location": "~/.openclaw/skills/ and ~/.agents/skills/"},
+        {"name": "find-skills", "location": "~/.openclaw/skills/ and ~/.agents/skills/"},
+        {"name": "ai-engineer", "location": "~/.qclaw/skills/"},
+        {"name": "deepseek-balance", "location": "~/.qclaw/skills/", "note": "Custom skill, created 2026-05-25"},
+        {"name": "redbox-xiaohongshu-creator", "location": "~/.qclaw/skills/"}
+      ]
+    },
+    "bundled_skills": {
+      "description": "Bundled with QClaw, always available",
+      "items": [
+        {"name": "lark-setup"},
+        {"name": "lark-calendar"},
+        {"name": "lark-im"},
+        {"name": "lark-doc"},
+        {"name": "lark-drive"},
+        {"name": "lark-sheets"},
+        {"name": "lark-base"},
+        {"name": "lark-task"},
+        {"name": "lark-mail"},
+        {"name": "lark-contact"},
+        {"name": "lark-wiki"},
+        {"name": "online-search"},
+        {"name": "qclaw-cron-skill"},
+        {"name": "qclaw-env"},
+        {"name": "qclaw-rules"},
+        {"name": "qclaw-text-file"},
+        {"name": "qclaw-skill-creator"},
+        {"name": "skillhub-preference"},
+        {"name": "tencent-docs"},
+        {"name": "qq-email-skill"},
+        {"name": "qclaw-migration"},
+        {"name": "xbrowser"}
+      ]
+    }
+  },
+  "agents": {
+    "description": "OpenClaw agent configurations (see openclaw-config-template.json)",
+    "agents": [
+      {"id": "main", "name": "QClaw", "model": "qclaw/modelroute"},
+      {"id": "agent-f1255120", "name": "智能Agent", "model": "qclaw/modelroute"},
+      {"id": "deepseek-flash", "name": "DeepSeek Flash", "model": "deepseek/deepseek-chat"},
+      {"id": "deepseek-pro", "name": "DeepSeek Pro", "model": "deepseek/deepseek-reasoner"},
+      {"id": "openrouter", "name": "OpenRouter", "model": "anthropic/claude-opus-4.8"}
+    ]
+  },
+  "install_order": [
+    "Step 1: Install runtimes (Node, Python, Git)",
+    "Step 2: Install QClaw / OpenClaw platform",
+    "Step 3: Install system skills via skillhub_install or QClaw UI",
+    "Step 4: pip install -r requirements.txt",
+    "Step 5: npm install -g $(cat npm-global.txt)",
+    "Step 6: Copy openclaw-config-template.json to ~/.qclaw/openclaw.json and fill in API keys",
+    "Step 7: Run openclaw gateway restart"
+  ]
+}
