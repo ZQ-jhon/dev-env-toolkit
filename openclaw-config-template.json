@@ -1,0 +1,154 @@
+{
+  "_comment": "Sanitized openclaw.json template — all API keys replaced with ${ENV_VAR} placeholders",
+  "_usage": "Copy to ~/.qclaw/openclaw.json and fill in your values (or use env vars)",
+  "_generated_from": "openclaw v0.2.23.532 config",
+  "_generated_at": "2026-05-31T01:30:00+08:00",
+
+  "agents": {
+    "defaults": {
+      "model": { "primary": "qclaw/modelroute" },
+      "workspace": "C:\\Users\\Administrator\\.qclaw\\workspace",
+      "maxConcurrent": 3,
+      "timeoutSeconds": 72000,
+      "llm": { "idleTimeoutSeconds": 0 },
+      "heartbeat": { "isolatedSession": true, "lightContext": true },
+      "memorySearch": { "provider": "auto" }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "name": "QClaw",
+        "reasoningDefault": "stream",
+        "skills": [
+          "another_them", "cloud-upload-backup", "docx", "email-skill",
+          "find-skills", "imap-smtp-email", "lark-setup", "mcporter",
+          "multi-search-engine", "neodata-financial-search", "online-search",
+          "pdf", "qclaw-cron-skill", "qclaw-env", "qclaw-rules",
+          "qclaw-skill-creator", "qclaw-text-file", "self-improving",
+          "xbrowser", "xlsx", "fbs_bookwriter", "persona-switch",
+          "wecom-weisheng-scrm", "lark-calendar", "lark-im", "lark-doc",
+          "lark-drive", "lark-sheets", "lark-base", "lark-task",
+          "lark-mail", "lark-contact", "lark-wiki", "skillhub-preference",
+          "tencent-docs", "qq-email-skill", "qclaw-migration"
+        ],
+        "identity": { "name": "QClaw" }
+      },
+      {
+        "id": "openrouter",
+        "name": "OpenRouter",
+        "reasoningDefault": "off",
+        "model": { "primary": "anthropic/claude-opus-4.8" },
+        "workspace": "C:\\Users\\Administrator\\.qclaw\\workspace-openrouter",
+        "skills": [
+          "find-skills", "qclaw-rules", "qclaw-env", "qclaw-cron-skill",
+          "qclaw-text-file", "skillhub-preference", "qclaw-skill-creator",
+          "online-search", "xbrowser", "tencent-docs", "pdf", "xlsx",
+          "docx", "lark-calendar", "lark-im", "lark-doc", "lark-drive",
+          "lark-sheets", "lark-base", "lark-task", "lark-mail",
+          "lark-contact", "lark-wiki", "lark-setup", "qq-email-skill",
+          "qclaw-migration"
+        ],
+        "identity": { "name": "OpenRouter" }
+      },
+      {
+        "id": "deepseek-flash",
+        "name": "DeepSeek Flash",
+        "model": { "primary": "deepseek/deepseek-chat" },
+        "reasoningDefault": "off",
+        "workspace": "C:\\Users\\Administrator\\.qclaw\\workspace-deepseek-flash"
+      },
+      {
+        "id": "deepseek-pro",
+        "name": "DeepSeek Pro",
+        "model": { "primary": "deepseek/deepseek-reasoner" },
+        "reasoningDefault": "stream",
+        "workspace": "C:\\Users\\Administrator\\.qclaw\\workspace-deepseek-pro"
+      }
+    ]
+  },
+
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "qclaw": {
+        "baseUrl": "${QCLAW_LLM_BASE_URL}",
+        "apiKey": "${QCLAW_LLM_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          { "id": "modelroute", "name": "modelroute", "input": ["text", "image"], "reasoning": true }
+        ]
+      },
+      "openrouter": {
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "apiKey": "${OPENROUTER_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          { "id": "anthropic/claude-3.5-sonnet", "name": "Claude 3.5 Sonnet", "input": ["text", "image"], "reasoning": false },
+          { "id": "anthropic/claude-opus-4.8",   "name": "Claude Opus 4.8",   "input": ["text", "image"], "reasoning": false }
+        ]
+      },
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com",
+        "apiKey": "${DEEPSEEK_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          { "id": "deepseek-chat",     "name": "DeepSeek V3",      "input": ["text"], "reasoning": false },
+          { "id": "deepseek-reasoner",  "name": "DeepSeek Reasoner", "input": ["text"], "reasoning": true }
+        ]
+      }
+    }
+  },
+
+  "gateway": {
+    "port": 64541,
+    "mode": "local",
+    "bind": "loopback"
+  },
+
+  "channels": {
+    "openclaw-weixin": {
+      "enabled": true,
+      "transport": "local"
+    },
+    "feishu": {
+      "enabled": true,
+      "accounts": {
+        "cli_aa8783e887789cce": {
+          "appId": "${QCLAW_FEISHU_ACCOUNT_CLI_AA8783E887789CCE_APPID}",
+          "appSecret": "${QCLAW_FEISHU_ACCOUNT_CLI_AA8783E887789CCE_APPSECRET}",
+          "dmPolicy": "open",
+          "allowFrom": ["*"],
+          "groupPolicy": "open"
+        },
+        "cli_aa9b87680eb8dccd": {
+          "appId": "${QCLAW_FEISHU_ACCOUNT_CLI_AA9B87680EB8DCCD_APPID}",
+          "appSecret": "${QCLAW_FEISHU_ACCOUNT_CLI_AA9B87680EB8DCCD_APPSECRET}",
+          "dmPolicy": "open",
+          "allowFrom": ["*"],
+          "groupPolicy": "open"
+        },
+        "cli_aa9b87fc02f8dcc7": {
+          "appId": "${QCLAW_FEISHU_ACCOUNT_CLI_AA9B87FC02F8DCC7_APPID}",
+          "appSecret": "${QCLAW_FEISHU_ACCOUNT_CLI_AA9B87FC02F8DCC7_APPSECRET}",
+          "dmPolicy": "open",
+          "allowFrom": ["*"],
+          "groupPolicy": "open"
+        }
+      }
+    }
+  },
+
+  "plugins": {
+    "enabled": true,
+    "allow": [
+      "wechat-access", "qclaw-plugin", "lossless-claw",
+      "browser", "memory-core", "feishu", "qclaw-embedding", "deepseek",
+      "openclaw-weixin"
+    ]
+  },
+
+  "bindings": [
+    { "agentId": "openrouter", "match": { "channel": "openclaw-weixin", "accountId": "*" } }
+  ]
+}
