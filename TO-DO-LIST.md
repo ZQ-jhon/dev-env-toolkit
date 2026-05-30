@@ -119,6 +119,38 @@ nrm use taobao    # 淘宝镜像 https://registry.npmmirror.com/
 nrm use tencent   # 腾讯镜像 https://mirrors.tencent.com/npm/
 ```
 
+### 1.8 Hermes Agent
+
+| 平台 | 安装方式 |
+|------|----------|
+| Windows | `npm install -g hermes` + 按提示安装 hermes-agent（Python venv） |
+| macOS | `brew install hermes` 或 `npm install -g hermes` |
+| Linux | `npm install -g hermes` |
+
+```bash
+# 验证
+hermes --version
+# 当前版本：0.4.4
+
+hermes-agent --version
+# Python 版 hermes-agent（需安装依赖：pip install websockets）
+```
+
+> **注意**：`hermes-agent` 依赖 Python venv，如报错 `No module named 'websockets'`，运行：
+> ```bash
+> pip install websockets
+> ```
+
+# 验证
+nrm --version
+# 当前版本：2.1.0
+
+# 切换 npm 镜像（国内推荐）
+nrm use taobao    # 淘宝镜像 https://registry.npmmirror.com/
+# 或
+nrm use tencent   # 腾讯镜像 https://mirrors.tencent.com/npm/
+```
+
 ---
 
 ## Phase 2：OpenClaw 平台
@@ -298,6 +330,8 @@ cp openclaw-config-template.json ~/.qclaw/openclaw.json
 - [ ] `adb --version` — Android SDK 正常
 - [ ] `nvm version` — NVM 正常
 - [ ] `nrm --version` — NRM 正常
+- [ ] `hermes --version` — Hermes CLI 正常
+- [ ] `hermes-agent --version` — Hermes Agent 正常
 - [ ] `python --version` → 3.12.10
 - [ ] `node --version` → v22.16.0
 - [ ] `npm --version` → 10.9.8
