@@ -1,6 +1,6 @@
 # dev-env-toolkit
 
-My personal development environment toolkit 鈥?a one-command setup to restore the full OpenClaw + skills + Python/Node toolchain on a new machine.
+My personal development environment toolkit — a one-command setup to restore the full OpenClaw + skills + Python/Node toolchain on a new machine.
 
 ## What's Included
 
@@ -28,18 +28,18 @@ My personal development environment toolkit 鈥?a one-command setup to restore t
 | tencent-meeting-mcp | system | global | 2026-05-27 |
 | weread-skills | system | global | 2026-05-29 |
 | tencent-survey | system | global | 2026-05-30 |
-| ai-engineer | local | agent | 鈥?|
-| agent-development | local | agent | 鈥?|
-| agent-evaluation | local | agent | 鈥?|
-| agent-manager-skill | local | agent | 鈥?|
-| excel-analysis | local | agent | 鈥?|
-| find-skills | local | agent | 鈥?|
-| lark-* (10 skills) | system | agent | 鈥?|
-| online-search | system | agent | 鈥?|
-| qclaw-* (4 skills) | bundled | agent | 鈥?|
-| redbox-xiaohongshu-creator | system | agent | 鈥?|
-| tencent-docs | system | agent | 鈥?|
-| qq-email-skill | system | agent | 鈥?|
+| ai-engineer | local | agent | — |
+| agent-development | local | agent | — |
+| agent-evaluation | local | agent | — |
+| agent-manager-skill | local | agent | — |
+| excel-analysis | local | agent | — |
+| find-skills | local | agent | — |
+| lark-* (10 skills) | system | agent | — |
+| online-search | system | agent | — |
+| qclaw-* (4 skills) | bundled | agent | — |
+| redbox-xiaohongshu-creator | system | agent | — |
+| tencent-docs | system | agent | — |
+| qq-email-skill | system | agent | — |
 
 ### Python Packages (pip)
 
@@ -109,7 +109,7 @@ bash install.sh
 2. Installs missing runtimes if needed
 4. Restores all pip packages via `requirements.txt`
 5. Restores all npm global packages via `npm-global.txt`
-6. Guides you through `openclaw.json` config (API keys are in `.env.template` 鈥?you fill in your own)
+6. Guides you through `openclaw.json` config (API keys are in `.env.template` — you fill in your own)
 7. Verifies the installation
 
 ## Manual Setup
@@ -148,4 +148,4 @@ npm install -g $(cat npm-global.txt)
 
 ## Author
 
-tychozhang 鈫?[GitHub @ZQ-jhon](https://github.com/ZQ-jhon)
+tychozhang → [GitHub @ZQ-jhon](https://github.com/ZQ-jhon)
