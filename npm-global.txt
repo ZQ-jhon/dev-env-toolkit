@@ -1,6 +1,0 @@
-# npm global packages
-# Generated: 2026-05-31
-# Node v22.16.0 | npm 10.9.8
-
-@larksuite/cli@1.0.44
-@openai/codex@0.133.0
