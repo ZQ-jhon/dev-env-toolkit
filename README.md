@@ -13,7 +13,7 @@
 | **npm 全局包** | `@larksuite/cli`, `@openai/codex` |
 | **OpenClaw** | v0.2.23.532 配置模板 + skills 清单 |
 | **一键脚本** | `install.ps1`（Windows）+ `install.sh`（macOS/Linux） |
-| **常用软件** | Snipaste, Warp, Obsidian, Postman, Edge, Clash Verge, Raycast(macOS), CC Switch(Windows), Charles, Typeless(Windows) |
+| **常用软件** | Snipaste, Warp, Obsidian, Postman, Edge, Clash Verge, VS Code, Raycast(macOS), CC Switch(Windows), Charles, Typeless(Windows), WeType(Windows) |
 
 > Skills 可从公开平台按需实时下载，本仓库不存储 `.skill` 文件。
 
@@ -85,10 +85,12 @@ bash install.sh
 | Postman | `winget install Postman.Postman` | `brew install --cask postman` | [官网](https://www.postman.com/) |
 | Edge | `winget install Microsoft.Edge` | `brew install --cask microsoft-edge` | [官网](https://www.microsoft.com/edge) |
 | Clash Verge | `winget install Clash.Verge.Rev` | `brew install --cask clash-verge-rev` | [下载](https://github.com/clash-verge-rev/clash-verge-rev/releases) |
+| **VS Code** | `winget install Microsoft.VisualStudioCode` | `brew install --cask visual-studio-code` | `sudo snap install code --classic` |
 | Raycast | 不支持 | `brew install --cask raycast` | 不支持 |
 | CC Switch | `winget install CCSwitch` | 不支持 | 不支持 |
 | Charles | `winget install Charles.Charles` | `brew install --cask charles` | 不支持 |
 | Typeless | [Store](https://apps.microsoft.com/store/detail/typeless/) | 不支持 | 不支持 |
+| **微信输入法（WeType）** | [官网](https://zhiwen.weixin.qq.com/) 或 `winget install Tencent.WeType` | 不支持 | 不支持 |
 
 > ⚠️ 软件安装前请先完成基础环境（Phase 1~8）
 
@@ -133,6 +135,8 @@ openclaw gateway status
 | Raycast | 启动器/效率工具 | macOS only |
 | CC Switch | 剪贴板管理 | Windows only |
 | Charles | HTTP 抓包代理 | Windows / macOS |
+| **VS Code** | 代码编辑器 | Windows / macOS / Linux |
+| **微信输入法** | 中文输入法 | Windows only |
 | Typeless | 打字统计 | Windows only |
 
 ---
