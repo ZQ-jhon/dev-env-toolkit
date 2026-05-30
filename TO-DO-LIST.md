@@ -141,15 +141,27 @@ hermes-agent --version
 > pip install websockets
 > ```
 
-# 验证
-nrm --version
-# 当前版本：2.1.0
+### 1.9 Claude Code（Anthropic CLI 编程助手）
 
-# 切换 npm 镜像（国内推荐）
-nrm use taobao    # 淘宝镜像 https://registry.npmmirror.com/
-# 或
-nrm use tencent   # 腾讯镜像 https://mirrors.tencent.com/npm/
+| 平台 | 安装方式 |
+|------|----------|
+| Windows | `npm install -g @anthropic-ai/claude-code` |
+| macOS | `brew install anthropic/claude/claude` 或 `npm install -g @anthropic-ai/claude-code` |
+| Linux | `npm install -g @anthropic-ai/claude-code` |
+
+```bash
+# 验证
+claude --version
+
+# 登录（需要 Anthropic API Key）
+claude login
+
+# 使用
+claude "帮我写一个 Python 脚本"
 ```
+
+> **前置要求**：需要 Node.js ≥ 18 和 Anthropic API Key
+> 获取 Key：https://console.anthropic.com/
 
 ---
 
