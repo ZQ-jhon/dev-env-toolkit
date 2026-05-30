@@ -51,6 +51,7 @@ bash install.sh --dry-run
 | NVM | [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) | `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh \| bash` | 同 macOS |
 | NRM | `npm install -g nrm` | 同 Windows | 同 Windows |
 | Hermes Agent | `npm install -g hermes` | `brew install hermes` 或 `npm install -g hermes` | `npm install -g hermes` |
+| Claude Code | `npm install -g @anthropic-ai/claude-code` | `brew install anthropic/claude/claude` | `npm install -g @anthropic-ai/claude-code` |
 
 ### 2. 配置 API Keys
 
