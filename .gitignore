@@ -1,0 +1,9 @@
+node_modules/
+.env
+*.log
+*.tmp
+.DS_Store
+*.skill
+openclaw.json
+*.db
+*.db-journal
